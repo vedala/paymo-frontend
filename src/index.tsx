@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { Auth0Provider } from '@auth0/auth0-react';
+import Auth0ProviderWithNavigate from './components/Auth0ProviderWithNavigate';
 import App from './App';
 import {
   AUTH0_DOMAIN,
@@ -14,7 +14,7 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <Auth0Provider
+    <Auth0ProviderWithNavigate
       domain={AUTH0_DOMAIN}
       clientId={AUTH0_CLIENT_ID}
       authorizationParams={{
@@ -23,6 +23,6 @@ root.render(
       }}
     >
       <App />
-    </Auth0Provider>
+    </Auth0ProviderWithNavigate>
   </React.StrictMode>
 );
