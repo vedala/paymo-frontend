@@ -7,6 +7,7 @@ import {
 import './App.css';
 import Welcome from './components/Welcome';
 import Dashboard from './components/Dashboard';
+import CallbackPage from './components/CallbackPage';
 
 function App() {
 
@@ -16,6 +17,7 @@ function App() {
         <Routes>
         <Route path="/" element={<Welcome />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/callback" element={<CallbackPage />} />
         </Routes>
       </div>
     </Router>
