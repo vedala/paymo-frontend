@@ -3,7 +3,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 import LoginButton from './LoginButton';
 import LogoutButton from './LogoutButton';
 
-function Header() {
+function NavBar() {
   const { isAuthenticated, isLoading } = useAuth0();
 
   if (isLoading) {
@@ -21,4 +21,4 @@ function Header() {
   );
 }
 
-export default Header;
+export default NavBar;
