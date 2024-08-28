@@ -5,6 +5,7 @@ import {
   Route,
 } from 'react-router-dom';
 import './App.css';
+import Welcome from './components/Welcome';
 import Dashboard from './components/Dashboard';
 
 function App() {
@@ -13,7 +14,8 @@ function App() {
     <Router>
       <div className="App">
         <Routes>
-          <Route path="/" element={<Dashboard />} />
+        <Route path="/" element={<Welcome />} />
+        <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
       </div>
     </Router>
