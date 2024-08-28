@@ -1,10 +1,10 @@
 import React from 'react';
-import Header from './Header';
+import NavBar from './NavBar';
 
 function Dashboard() {
   return (
     <div className="dashboard">
-      <Header />
+      <NavBar />
       <h1>Paymo Dashboard</h1>
     </div>
   );

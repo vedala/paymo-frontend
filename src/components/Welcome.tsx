@@ -1,10 +1,10 @@
 import React from 'react';
-import Header from './Header';
+import NavBar from './NavBar';
 
 function Welcome() {
   return (
     <div className="welcome">
-      <Header />
+      <NavBar />
       <h1>Welcome to Paymo!</h1>
     </div>
   );
