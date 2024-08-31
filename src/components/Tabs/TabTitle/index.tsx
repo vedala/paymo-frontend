@@ -1,4 +1,5 @@
 import React, { useCallback } from "react";
+import styles from "./tabTitle.module.css";
 
 export type Props = {
   title: string,
@@ -15,7 +16,7 @@ const TabTitle = (props: Props) => {
   }, [setSelectedTab, index]);
 
   return (
-    <li className={`${isActive ? 'active' : ''}`}>
+    <li className={`${styles.title} ${isActive ? 'active' : ''}`}>
       <button onClick={handleOnClick}>{title}</button>
     </li>
   )

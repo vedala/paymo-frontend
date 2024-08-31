@@ -1,5 +1,6 @@
 import React, { ReactElement, useState } from "react";
 import TabTitle, { Props as TabTitleProps } from "./TabTitle";
+import styles from "./tabs.module.css";
 
 type Props = {
   children: ReactElement<TabTitleProps>[];
@@ -12,7 +13,7 @@ const Tabs = (props: Props) => {
   const [selectedTabIndex, setSelectedTabIndex] = useState(preSelectedTabIndex || 0);
 
   return (
-    <div>
+    <div className={styles.tabs}>
       <ul>
         {children.map((item, index) => (
           <TabTitle
