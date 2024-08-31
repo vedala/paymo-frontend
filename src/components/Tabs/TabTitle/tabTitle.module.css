@@ -3,5 +3,6 @@
 }
 
 .title[class~='active'] button {
-  color: #0e51bd;
+  background-color: #555;
+  color: #ddd;
 }
