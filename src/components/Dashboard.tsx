@@ -1,7 +1,7 @@
 import React from 'react';
 import NavBar from './NavBar';
 import Tabs from './Tabs';
-import TabPane from './TabPane';
+import TabPane from './Tabs/TabPane';
 
 function Dashboard() {
   return (
