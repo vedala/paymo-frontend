@@ -1,0 +1,7 @@
+.title button {
+  font-size: 1em;
+}
+
+.title[class~='active'] button {
+  color: #0e51bd;
+}
