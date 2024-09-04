@@ -2,3 +2,18 @@
   text-align: center;
 }
 
+ul.tab-bar {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+}
+
+ul.tab-bar > li {
+  margin-left: 0.4em;
+  margin-right: 0.4em;
+}
+
+ul.tab-bar button.active {
+  background-color: #555;
+  color: #ddd;
+}
