@@ -13,6 +13,10 @@ ul.tab-bar > li {
   margin-right: 0.4em;
 }
 
+ul.tab-bar button {
+  font-size: 1em;
+}
+
 ul.tab-bar button.active {
   background-color: #555;
   color: #ddd;
