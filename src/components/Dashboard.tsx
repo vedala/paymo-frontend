@@ -48,7 +48,7 @@ function Dashboard() {
         </li>
       </ul>
 
-      <Banks />
+      {(selectedTab === "banks") && <Banks />}
     </div>
   );
 }
