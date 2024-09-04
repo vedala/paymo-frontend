@@ -1,14 +1,54 @@
-import React from 'react';
+import React, { useState } from 'react';
 import NavBar from './NavBar';
-import Tabs from './Tabs';
-import TabPane from './Tabs/TabPane';
+// import Tabs from './Tabs';
+// import TabPane from './Tabs/TabPane';
 
 function Dashboard() {
+  const [selectedTab, setSelectedTab] = useState("banks");
+
+  const handleTabClick = (clickedTab: any) => {
+    setSelectedTab(clickedTab);
+  };
+
   return (
     <div className="dashboard">
       <NavBar />
       <h1>Paymo Dashboard</h1>
-      <Tabs>
+      <ul className="tab-bar">
+        <li className="banks">
+          <button
+            className={selectedTab === "banks" ? 'active' : ''}
+            onClick={() => handleTabClick("banks")}
+          >
+            Banks
+          </button>
+        </li>
+        <li className="recipients">
+          <button
+            className={selectedTab === "recipients" ? 'active' : ''}
+            onClick={() => handleTabClick("recipients")}
+          >
+            Recipients
+          </button>
+        </li>
+        <li className="activity">
+          <button
+            className={selectedTab === "activity" ? 'active' : ''}
+            onClick={() => handleTabClick("activity")}
+          >
+            Activity
+          </button>
+        </li>
+        <li className="send-money">
+          <button
+            className={selectedTab === "send-money" ? 'active' : ''}
+            onClick={() => handleTabClick("send-money")}
+          >
+            Send Money
+          </button>
+        </li>
+      </ul>
+      {/* <Tabs>
         <TabPane title="Banks">
           <div>Banks</div>
         </TabPane>
@@ -21,7 +61,7 @@ function Dashboard() {
         <TabPane title="Send Money">
           <div>Send Money</div>
         </TabPane>
-      </Tabs>
+      </Tabs> */}
     </div>
   );
 }
