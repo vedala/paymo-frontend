@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import NavBar from './NavBar';
+import Banks from './Banks';
 
 function Dashboard() {
   const [selectedTab, setSelectedTab] = useState("banks");
@@ -46,6 +47,8 @@ function Dashboard() {
           </button>
         </li>
       </ul>
+
+      {(selectedTab === "banks") && <Banks />}
     </div>
   );
 }
