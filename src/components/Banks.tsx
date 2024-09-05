@@ -27,16 +27,7 @@ const Banks = () => {
       .catch(err => {console.log(err); throw err; })
     };
     fetchData();
-    // setBanks([
-    //   {
-    //     id: 1,
-    //     name: "Bank1",
-    //   },
-    //   {
-    //     id: 2,
-    //     name: "Bank2",
-    //   }
-    // ]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const bankList = banks.map((bank) => {
