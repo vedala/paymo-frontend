@@ -8,6 +8,7 @@ const Auth0ProviderWithNavigate = ({ children } : any) => {
   const domain = process.env.REACT_APP_AUTH0_DOMAIN;
   const clientId = process.env.REACT_APP_AUTH0_CLIENT_ID;
   const redirectUri = process.env.REACT_APP_AUTH0_REDIRECT_URI;
+  const auth0Audience = process.env.REACT_APP_AUTH0_AUDIENCE;
 
   const onRedirectCallback = (appState : any) => {
     navigate(appState?.returnTo || window.location.pathname);
@@ -23,6 +24,7 @@ const Auth0ProviderWithNavigate = ({ children } : any) => {
       clientId={clientId}
       authorizationParams={{
         redirect_uri: redirectUri,
+        audience: auth0Audience
       }}
       onRedirectCallback={onRedirectCallback}
     >
