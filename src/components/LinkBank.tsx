@@ -17,6 +17,7 @@ const LinkBank = () => {
       body: JSON.stringify({ public_token: publicToken }),
     });
     setLoading(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const createLinkToken = useCallback(async () => {
@@ -31,9 +32,11 @@ const LinkBank = () => {
         }
       });
       const data = await response.json();
+console.log("createLinkToken: data=", data);
       setToken(data.link_token);
       localStorage.setItem("link_token", data.link_token);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [setToken]);
 
   let isOauth = false;
@@ -51,7 +54,6 @@ const LinkBank = () => {
   const { open, ready } = usePlaidLink(config);
 
   useEffect(() => {
-console.log("token=", token);
     if (token === null) {
       createLinkToken();
     }
