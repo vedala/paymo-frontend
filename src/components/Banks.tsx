@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import LinkBank from "./LinkBank";
 import axios from "axios";
 import { useAuth0 } from "@auth0/auth0-react";
 import { PAYMO_API_URL } from "../constants";
@@ -42,6 +43,7 @@ const Banks = () => {
     <div>
       <h2>Connected Banks</h2>
       <ul>{bankList}</ul>
+      <LinkBank />
     </div>
   );
 };
