@@ -8,7 +8,7 @@ const LinkBank = () => {
 
   const onSuccess = useCallback(async (publicToken: string) => {
     setLoading(true);
-    await fetch("/api/exchange_public_token", {
+    await fetch(`${PAYMO_API_URL}/api/exchange_public_token`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
