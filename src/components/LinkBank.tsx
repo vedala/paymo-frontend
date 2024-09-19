@@ -1,10 +1,10 @@
 import { useState, useEffect, useCallback } from "react";
 import { usePlaidLink } from "react-plaid-link";
 
-const LinkBank = () => {
+const LinkBank = ({ onAddBank }: any) => {
   const PAYMO_API_URL = process.env.REACT_APP_PAYMO_API_URL;
   const [token, setToken] = useState<string | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   const onSuccess = useCallback(async (publicToken: string) => {
     setLoading(true);
@@ -17,6 +17,7 @@ const LinkBank = () => {
       body: JSON.stringify({ public_token: publicToken }),
     });
     setLoading(false);
+    onAddBank();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
