@@ -67,15 +67,16 @@ console.log("createLinkToken: data=", data);
 
   return (
     <div>
-      <button
-        onClick={() => open()}
-        disabled={!ready}
-      >
-        Link bank
-      </button>
-
       {!loading &&
-        <h2>Data displayed here</h2>
+        <button
+          onClick={() => open()}
+          disabled={!ready}
+        >
+          Link bank
+        </button>
+      }
+      {loading &&
+        <span>Loading...</span>
       }
     </div>
   );
