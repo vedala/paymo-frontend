@@ -15,18 +15,19 @@ const Banks = () => {
 
   const [banks, setBanks] = useState<Array<BanksObject>>([]);
 
+  const fetchData = async () => {
+    const token = await getAccessTokenSilently();
+    await axios.get(`${PAYMO_API_URL}/banks`, {
+      headers: { 'Authorization': `Bearer ${token}`}
+    })
+    .then(res => {
+      const bankData = res.data;
+      setBanks(bankData);
+    })
+    .catch(err => {console.log(err); throw err; })
+  };
+
   useEffect(() => {
-    async function fetchData() {
-      const token = await getAccessTokenSilently();
-      await axios.get(`${PAYMO_API_URL}/banks`, {
-        headers: { 'Authorization': `Bearer ${token}`}
-      })
-      .then(res => {
-        const bankData = res.data;
-        setBanks(bankData);
-      })
-      .catch(err => {console.log(err); throw err; })
-    };
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -43,7 +44,7 @@ const Banks = () => {
     <div>
       <h2>Connected Banks</h2>
       <ul>{bankList}</ul>
-      <LinkBank />
+      <LinkBank onAddBank={fetchData} />
     </div>
   );
 };
