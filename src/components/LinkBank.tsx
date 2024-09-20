@@ -33,7 +33,6 @@ const LinkBank = ({ onAddBank }: any) => {
         }
       });
       const data = await response.json();
-console.log("createLinkToken: data=", data);
       setToken(data.link_token);
       localStorage.setItem("link_token", data.link_token);
     }
