@@ -34,8 +34,13 @@ const Recipients = () => {
   }, []);
 
   const onAddRecipientClick = () => {
-    setShowAddRecipient(prevState => !prevState);
+    setShowAddRecipient(true);
   }
+
+  const onCancelClick = () => {
+    setShowAddRecipient(false);
+  }
+
   const recipientsList = recipients.map((recipient) => {
     return (
       <li key={recipient.id}>
@@ -53,7 +58,11 @@ const Recipients = () => {
           <button onClick={onAddRecipientClick} >Add Recipient</button>
         </>
       }
-      {showAddRecipient && <AddRecipient />}
+      {showAddRecipient &&
+        <AddRecipient
+          onCancelClick={onCancelClick}
+        />
+      }
     </div>
   );
 };
