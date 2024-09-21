@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useAuth0 } from "@auth0/auth0-react";
 import { PAYMO_API_URL } from "../constants";
+import AddRecipient from "./AddRecipient";
 
 const Recipients = () => {
 
@@ -13,6 +14,7 @@ const Recipients = () => {
   }
 
   const [recipients, setRecipients] = useState<Array<RecipientsObject>>([]);
+  const [showAddRecipient, setShowAddRecipient] = useState(false);
 
   const fetchData = async () => {
     const token = await getAccessTokenSilently();
@@ -31,6 +33,9 @@ const Recipients = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const onAddRecipientClick = () => {
+    setShowAddRecipient(prevState => !prevState);
+  }
   const recipientsList = recipients.map((recipient) => {
     return (
       <li key={recipient.id}>
@@ -41,8 +46,14 @@ const Recipients = () => {
 
   return (
     <div>
-      <h2>Recipients</h2>
-      <ul>{recipientsList}</ul>
+      {!showAddRecipient &&
+        <>
+          <h2>Recipients</h2>
+          <ul>{recipientsList}</ul>
+          <button onClick={onAddRecipientClick} >Add Recipient</button>
+        </>
+      }
+      {showAddRecipient && <AddRecipient />}
     </div>
   );
 };
