@@ -9,10 +9,11 @@ const AddRecipient = ({ onCancelClick }: any) => {
 
   const { getAccessTokenSilently } = useAuth0();
 
-  const fetchUsers = async () => {
+  const fetchUsers = async (userEmailToSearch: string) => {
     const token = await getAccessTokenSilently();
     await axios.get(`${PAYMO_API_URL}/get_user_by_email`, {
-      headers: { 'Authorization': `Bearer ${token}`}
+      headers: { 'Authorization': `Bearer ${token}`},
+      params: {searchEmail: userEmailToSearch}
     })
     .then(res => {
       const resUsers = res.data;
@@ -24,8 +25,9 @@ console.log("resUsers=", resUsers);
 
   const handleFormSubmit = (e: any) => {
     e.preventDefault();
-console.log(e.target[0].value);
-    fetchUsers();
+    const elements = e.target.elements;
+    const recipientEmailValue = elements['recipient-email'].value;
+    fetchUsers(recipientEmailValue);
   }
 
   return (
