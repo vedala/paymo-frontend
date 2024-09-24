@@ -29,3 +29,12 @@ ul.tab-bar button.active {
 .add-recipient .button-bar {
   margin-top: 2em;
 }
+
+.not-found-message {
+  margin-top: 10px;
+  width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 5px 15px;
+  background-color: #FFAA80;
+}
