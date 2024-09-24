@@ -50,10 +50,6 @@ console.log("resUsers=", resUsers);
           <div className="not-found-message">{enteredEmail} not found.</div>
         }
       </form>
-      <div className="button-bar">
-        <button onClick={onCancelClick} >Cancel</button>
-        <button>Save</button>
-      </div>
     </div>
   );
 };
