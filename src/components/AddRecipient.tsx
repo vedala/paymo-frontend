@@ -5,7 +5,6 @@ import { useState } from "react";
 
 const AddRecipient = ({ onCancelClick, handleRecipientFound }: any) => {
 
-  const [foundUserData, setFoundUserData] = useState([]);
   const [displayNotFoundMessage, setDisplayNotFoundMessage] = useState(false);
   const [enteredEmail, setEnteredEmail] = useState(null);
 
@@ -19,7 +18,6 @@ const AddRecipient = ({ onCancelClick, handleRecipientFound }: any) => {
     })
     .then(res => {
       const resUsers = res.data;
-      setFoundUserData(resUsers);
       if (resUsers.length > 0) {
         handleRecipientFound();
       }
