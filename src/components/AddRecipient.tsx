@@ -6,6 +6,8 @@ import { useState } from "react";
 const AddRecipient = ({ onCancelClick }: any) => {
 
   const [foundUserData, setFoundUserData] = useState([]);
+  const [displayNotFoundMessage, setDisplayNotFoundMessage] = useState(false);
+  const [enteredEmail, setEnteredEmail] = useState(null);
 
   const { getAccessTokenSilently } = useAuth0();
 
@@ -18,6 +20,9 @@ const AddRecipient = ({ onCancelClick }: any) => {
     .then(res => {
       const resUsers = res.data;
       setFoundUserData(resUsers);
+      if (foundUserData.length === 0) {
+        setDisplayNotFoundMessage(true);
+      }
 console.log("resUsers=", resUsers);
     })
     .catch(err => {console.log(err); throw err; })
@@ -27,6 +32,7 @@ console.log("resUsers=", resUsers);
     e.preventDefault();
     const elements = e.target.elements;
     const recipientEmailValue = elements['recipient-email'].value;
+    setEnteredEmail(recipientEmailValue);
     fetchUsers(recipientEmailValue);
   }
 
@@ -36,7 +42,9 @@ console.log("resUsers=", resUsers);
       <form onSubmit={handleFormSubmit}>
         <input type="email" name="recipient-email" required placeholder="Recipient Email"/>
         <button>Search</button>
-        {"UserData:" + foundUserData}
+        {displayNotFoundMessage &&
+          <div className="not-found-message">{enteredEmail} not found.</div>
+        }
       </form>
       <div className="button-bar">
         <button onClick={onCancelClick} >Cancel</button>
