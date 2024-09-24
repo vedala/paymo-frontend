@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import NavBar from './NavBar';
 import Banks from './Banks';
 import Recipients from './Recipients';
+import SendMoney from './SendMoney';
 
 function Dashboard() {
   const [selectedTab, setSelectedTab] = useState("banks");
@@ -43,6 +44,7 @@ function Dashboard() {
 
       {(selectedTab === "banks") && <Banks />}
       {(selectedTab === "recipients") && <Recipients />}
+      {(selectedTab === "send-money") && <SendMoney />}
     </div>
   );
 }
