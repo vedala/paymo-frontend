@@ -26,6 +26,10 @@ ul.tab-bar button.active {
   color: #ddd;
 }
 
+.add-recipient .back-to-list {
+  margin-top: 30px;
+}
+
 .not-found-message {
   margin-top: 10px;
   width: 300px;
