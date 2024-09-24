@@ -3,7 +3,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { PAYMO_API_URL } from "../constants";
 import { useState } from "react";
 
-const AddRecipient = ({ onCancelClick, handleRecipientFound }: any) => {
+const AddRecipient = ({ onCancelClick, handleRecipientFound, handleBackToRecipientsList }: any) => {
 
   const [displayNotFoundMessage, setDisplayNotFoundMessage] = useState(false);
   const [enteredEmail, setEnteredEmail] = useState(null);
@@ -45,11 +45,13 @@ console.log("resUsers=", resUsers);
       <h2>Add Recipient</h2>
       <form onSubmit={handleFormSubmit}>
         <input type="email" name="recipient-email" required placeholder="Recipient Email"/>
-        <button>Search</button>
+        <button>Add Recipient</button>
         {displayNotFoundMessage &&
           <div className="not-found-message">{enteredEmail} not found.</div>
         }
       </form>
+      
+      <button className="back-to-list" onClick={handleBackToRecipientsList}>Back to Recipients List</button>
     </div>
   );
 };
