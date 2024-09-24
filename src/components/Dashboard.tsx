@@ -31,14 +31,6 @@ function Dashboard() {
             Recipients
           </button>
         </li>
-        <li className="activity">
-          <button
-            className={selectedTab === "activity" ? 'active' : ''}
-            onClick={() => handleTabClick("activity")}
-          >
-            Activity
-          </button>
-        </li>
         <li className="send-money">
           <button
             className={selectedTab === "send-money" ? 'active' : ''}
