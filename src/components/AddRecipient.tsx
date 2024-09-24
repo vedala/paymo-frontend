@@ -3,7 +3,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { PAYMO_API_URL } from "../constants";
 import { useState } from "react";
 
-const AddRecipient = ({ onCancelClick }: any) => {
+const AddRecipient = ({ onCancelClick, handleRecipientFound }: any) => {
 
   const [foundUserData, setFoundUserData] = useState([]);
   const [displayNotFoundMessage, setDisplayNotFoundMessage] = useState(false);
@@ -20,7 +20,10 @@ const AddRecipient = ({ onCancelClick }: any) => {
     .then(res => {
       const resUsers = res.data;
       setFoundUserData(resUsers);
-      if (foundUserData.length === 0) {
+      if (resUsers.length > 0) {
+        handleRecipientFound();
+      }
+      else {
         setDisplayNotFoundMessage(true);
         setTimeout(() => {
           setDisplayNotFoundMessage(false);

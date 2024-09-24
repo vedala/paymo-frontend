@@ -41,6 +41,11 @@ const Recipients = () => {
     setShowAddRecipient(false);
   }
 
+  const handleRecipientFound = () => {
+    setShowAddRecipient(false);
+    fetchData();
+  }
+
   const recipientsList = recipients.map((recipient) => {
     return (
       <li key={recipient.id}>
@@ -61,6 +66,7 @@ const Recipients = () => {
       {showAddRecipient &&
         <AddRecipient
           onCancelClick={onCancelClick}
+          handleRecipientFound={handleRecipientFound}
         />
       }
     </div>
