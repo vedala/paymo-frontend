@@ -22,6 +22,9 @@ const AddRecipient = ({ onCancelClick }: any) => {
       setFoundUserData(resUsers);
       if (foundUserData.length === 0) {
         setDisplayNotFoundMessage(true);
+        setTimeout(() => {
+          setDisplayNotFoundMessage(false);
+        }, 5000);
       }
 console.log("resUsers=", resUsers);
     })
