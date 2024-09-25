@@ -43,22 +43,22 @@ const SendMoney = () => {
     <div>
       <h2>Send Money</h2>
       <form className="send-money" onSubmit={handleFormSubmit}>
-        <select onChange={handleBankChange}>
+        <select id="select-bank" onChange={handleBankChange}>
           <option value="Select a bank"> -- Select a Bank -- </option>
           {banks.map((bank) => <option value={bank.id}>{bank.name}</option>)}
         </select>
 
         <br />
-        <select onChange={handleRecipientChange}>
+        <select id="select-recipient" onChange={handleRecipientChange}>
           <option value="Select a recipient">-- Select a Recipient --</option>
           {recipients.map((recipient) => <option value={recipient.id}>{recipient.name}</option>)}
         </select>
 
         <br />
-        <input pattern="\d+.\d\d" required placeholder="Enter Amount"></input>
+        <input id="enter-amount" pattern="\d+.\d\d" required placeholder="Enter Amount"></input>
 
         <br />
-        <button>Submit</button>
+        <button id="submit-button">Submit</button>
       </form>
     </div>
   );

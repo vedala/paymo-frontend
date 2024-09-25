@@ -38,3 +38,7 @@ ul.tab-bar button.active {
   padding: 5px 15px;
   background-color: #FFAA80;
 }
+
+.send-money #select-recipient,#enter-amount,#submit-button {
+  margin-top: 2em;
+}
