@@ -1,21 +1,39 @@
-import { useState } from "react";
+import { useAuth0 } from "@auth0/auth0-react";
+import { useState, useEffect } from "react";
+import axios from "axios";
+import { PAYMO_API_URL } from "../constants";
 
 const SendMoney = () => {
+
+  const { getAccessTokenSilently } = useAuth0();
+
+  interface BanksObject {
+    id: number,
+    name: string
+  }
+
+  const [banks, setBanks] = useState<Array<BanksObject>>([]);
 
   const handleFormSubmit = (e: any) => {
     e.preventDefault();
   }
 
-  let banks = [
-    {
-      id: 1,
-      name: "Chase",
-    },
-    {
-      id: 2,
-      name: "Regions Bank",
-    },
-  ];
+  const fetchBanksData = async () => {
+    const token = await getAccessTokenSilently();
+    await axios.get(`${PAYMO_API_URL}/banks`, {
+      headers: { 'Authorization': `Bearer ${token}`}
+    })
+    .then(res => {
+      const bankData = res.data;
+      setBanks(bankData);
+    })
+    .catch(err => {console.log(err); throw err; })
+  };
+
+  useEffect(() => {
+    fetchBanksData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   let recipients = [
     {
@@ -45,13 +63,13 @@ const SendMoney = () => {
       <form className="send-money" onSubmit={handleFormSubmit}>
         <select id="select-bank" onChange={handleBankChange}>
           <option value="Select a bank"> -- Select a Bank -- </option>
-          {banks.map((bank) => <option value={bank.id}>{bank.name}</option>)}
+          {banks.map((bank) => <option key={bank.id} value={bank.id}>{bank.name}</option>)}
         </select>
 
         <br />
         <select id="select-recipient" onChange={handleRecipientChange}>
           <option value="Select a recipient">-- Select a Recipient --</option>
-          {recipients.map((recipient) => <option value={recipient.id}>{recipient.name}</option>)}
+          {recipients.map((recipient) => <option key={recipient.id} value={recipient.id}>{recipient.name}</option>)}
         </select>
 
         <br />
