@@ -1,20 +1,23 @@
 import { useState, useEffect, useCallback } from "react";
 import { usePlaidLink } from "react-plaid-link";
+import { useAuth0 } from '@auth0/auth0-react';
 
 const LinkBank = ({ onAddBank }: any) => {
   const PAYMO_API_URL = process.env.REACT_APP_PAYMO_API_URL;
   const [token, setToken] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
+  const { user } = useAuth0();
   const onSuccess = useCallback(async (publicToken: string) => {
     setLoading(true);
+console.log("LinkBank: user=", user);
     await fetch(`${PAYMO_API_URL}/api/exchange_public_token`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         "Accept": "application/json",
       },
-      body: JSON.stringify({ public_token: publicToken }),
+      body: JSON.stringify({ public_token: publicToken, user_id: user?.sub }),
     });
     setLoading(false);
     onAddBank();
