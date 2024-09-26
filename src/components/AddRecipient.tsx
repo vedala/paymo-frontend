@@ -8,13 +8,13 @@ const AddRecipient = ({ onCancelClick, handleRecipientFound, handleBackToRecipie
   const [displayNotFoundMessage, setDisplayNotFoundMessage] = useState(false);
   const [enteredEmail, setEnteredEmail] = useState(null);
 
-  const { getAccessTokenSilently } = useAuth0();
+  const { getAccessTokenSilently, user } = useAuth0();
 
   const fetchUsers = async (userEmailToSearch: string) => {
     const token = await getAccessTokenSilently();
     await axios.get(`${PAYMO_API_URL}/get_user_by_email`, {
       headers: { 'Authorization': `Bearer ${token}`},
-      params: {searchEmail: userEmailToSearch}
+      params: {searchEmail: userEmailToSearch, senderUserId: user?.sub }
     })
     .then(res => {
       const resUsers = res.data;
