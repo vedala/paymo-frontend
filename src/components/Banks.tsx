@@ -6,7 +6,7 @@ import { PAYMO_API_URL } from "../constants";
 
 const Banks = () => {
 
-  const { getAccessTokenSilently } = useAuth0();
+  const { getAccessTokenSilently, user } = useAuth0();
 
   interface BanksObject {
     id: number,
@@ -18,7 +18,8 @@ const Banks = () => {
   const fetchData = async () => {
     const token = await getAccessTokenSilently();
     await axios.get(`${PAYMO_API_URL}/banks`, {
-      headers: { 'Authorization': `Bearer ${token}`}
+      headers: { 'Authorization': `Bearer ${token}`},
+      params: { user_id: user?.sub}
     })
     .then(res => {
       const bankData = res.data;
