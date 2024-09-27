@@ -40,7 +40,8 @@ const SendMoney = () => {
   const fetchRecipientsData = async () => {
     const token = await getAccessTokenSilently();
     await axios.get(`${PAYMO_API_URL}/recipients`, {
-      headers: { 'Authorization': `Bearer ${token}`}
+      headers: { 'Authorization': `Bearer ${token}`},
+      params: {sender_user_id: user?.sub}
     })
     .then(res => {
       const recipientsData = res.data;
