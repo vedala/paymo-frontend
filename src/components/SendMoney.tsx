@@ -12,7 +12,13 @@ const SendMoney = () => {
     name: string
   }
 
+  interface RecipientsObject {
+    id: number,
+    name: string
+  }
+
   const [banks, setBanks] = useState<Array<BanksObject>>([]);
+  const [recipients, setRecipients] = useState<Array<RecipientsObject>>([]);
 
   const handleFormSubmit = (e: any) => {
     e.preventDefault();
@@ -30,21 +36,23 @@ const SendMoney = () => {
     .catch(err => {console.log(err); throw err; })
   };
 
+  const fetchRecipientsData = async () => {
+    const token = await getAccessTokenSilently();
+    await axios.get(`${PAYMO_API_URL}/recipients`, {
+      headers: { 'Authorization': `Bearer ${token}`}
+    })
+    .then(res => {
+      const recipientsData = res.data;
+      setRecipients(recipientsData);
+    })
+    .catch(err => {console.log(err); throw err; })
+  };
+
   useEffect(() => {
     fetchBanksData();
+    fetchRecipientsData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  let recipients = [
-    {
-      id: 1,
-      name: "Recipient-1",
-    },
-    {
-      id: 2,
-      name: "Recipient-2",
-    },
-  ];
 
   const [bank, setBank] = useState("Select a bank");
   const [recipient, setRecipient] = useState("Select a recipient");
