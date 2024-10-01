@@ -20,8 +20,22 @@ const SendMoney = () => {
   const [banks, setBanks] = useState<Array<BanksObject>>([]);
   const [recipients, setRecipients] = useState<Array<RecipientsObject>>([]);
 
-  const handleFormSubmit = (e: any) => {
+  const handleFormSubmit = async (e: any) => {
     e.preventDefault();
+console.log("selected bank=", bank);
+console.log("selected recipient=", recipient);
+console.log("amount=", e.target[2].value);
+    await axios.post(`${PAYMO_API_URL}/send_money`, {
+        bank_id: bank,
+        recipient_id: recipient,
+        amount: e.target[2].value,
+      }
+    )
+    .then(res => {
+      const bankData = res.data;
+      setBanks(bankData);
+    })
+    .catch(err => {console.log(err); throw err; })
   }
 
   const fetchBanksData = async () => {
