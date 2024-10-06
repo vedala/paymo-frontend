@@ -17,7 +17,7 @@ console.log("LinkBank: user=", user);
         "Content-Type": "application/json",
         "Accept": "application/json",
       },
-      body: JSON.stringify({ public_token: publicToken, user_id: user?.sub }),
+      body: JSON.stringify({ public_token: publicToken, user_id: user?.sub, user_name: user?.name, user_email: user?.email}),
     });
     setLoading(false);
     onAddBank();
