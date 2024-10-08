@@ -1,17 +1,23 @@
 import { useState, useEffect, useCallback } from "react";
 import { usePlaidLink } from "react-plaid-link";
 import { useAuth0 } from '@auth0/auth0-react';
+import { loadMoov } from "@moovio/moov-js";
+import MoovTerms from "./MoovTerms";
+import axios from "axios";
 
 const LinkBank = ({ onAddBank }: any) => {
   const PAYMO_API_URL = process.env.REACT_APP_PAYMO_API_URL;
   const [token, setToken] = useState<string | null>(null);
+  const [moovAccessToken, setMoovAccessToken] = useState<string>("");
   const [loading, setLoading] = useState(false);
+  const [displayMoovTermsOfService, setDisplayMoovTermsOfService] = useState(false);
+  const [termsOfService, setTermsOfService] = useState<string>("");
 
   const { user } = useAuth0();
   const onSuccess = useCallback(async (publicToken: string) => {
     setLoading(true);
 console.log("LinkBank: user=", user);
-    await fetch(`${PAYMO_API_URL}/api/exchange_public_token`, {
+    const exchangeTokenResponse = await fetch(`${PAYMO_API_URL}/api/exchange_public_token`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -20,6 +26,12 @@ console.log("LinkBank: user=", user);
       body: JSON.stringify({ public_token: publicToken, user_id: user?.sub, user_name: user?.name, user_email: user?.email}),
     });
     setLoading(false);
+    const responseData = await exchangeTokenResponse.json();
+    const responseToken = responseData.moovAccessToken.token;
+console.log("responseToken=", responseToken);
+    setMoovAccessToken(responseData.moovAccessToken.token);
+    await loadMoov(moovAccessToken);
+    setDisplayMoovTermsOfService(true);
     onAddBank();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -67,11 +79,35 @@ console.log("LinkBank: user=", user);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  useEffect(() => {
+    // Fetch the TOS from Moov's API (replace with the correct endpoint)
+    const fetchTermsOfService = async () => {
+      try {
+        const response = await axios.get('https://api.moov.io/tos');
+        setTermsOfService(response.data.terms);
+      } catch (error) {
+        console.error('Error fetching Terms of Service:', error);
+      }
+    };
+
+    fetchTermsOfService();
+  }, []);
+
+  const handleOnClick = async () => {
+    open();
+    return (
+      <MoovTerms
+        moovAccessToken={moovAccessToken}
+      />
+    )
+  };
+
   return (
     <div>
       {!loading &&
         <button
           onClick={() => open()}
+          // onClick={() => handleOnClick()}
           disabled={!ready}
         >
           Link bank
