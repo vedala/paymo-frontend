@@ -30,7 +30,7 @@ console.log("LinkBank: user=", user);
     const responseToken = responseData.moovAccessToken.token;
 console.log("responseToken=", responseToken);
     setMoovAccessToken(responseData.moovAccessToken.token);
-    await loadMoov(moovAccessToken);
+    // await loadMoov(moovAccessToken);
     setDisplayMoovTermsOfService(true);
     onAddBank();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -72,26 +72,26 @@ console.log("responseToken=", responseToken);
     if (token === null) {
       createLinkToken();
     }
-    if (isOauth && ready) {
-      open();
-    }
+    // if (isOauth && ready) {
+    //   open();
+    // }
   // }, [token, isOauth, ready, open]);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  useEffect(() => {
-    // Fetch the TOS from Moov's API (replace with the correct endpoint)
-    const fetchTermsOfService = async () => {
-      try {
-        const response = await axios.get('https://api.moov.io/tos');
-        setTermsOfService(response.data.terms);
-      } catch (error) {
-        console.error('Error fetching Terms of Service:', error);
-      }
-    };
+  // useEffect(() => {
+  //   // Fetch the TOS from Moov's API (replace with the correct endpoint)
+  //   const fetchTermsOfService = async () => {
+  //     try {
+  //       const response = await axios.get('https://api.moov.io/tos');
+  //       setTermsOfService(response.data.terms);
+  //     } catch (error) {
+  //       console.error('Error fetching Terms of Service:', error);
+  //     }
+  //   };
 
-    fetchTermsOfService();
-  }, []);
+  //   fetchTermsOfService();
+  // }, []);
 
   const handleOnClick = async () => {
     open();
@@ -104,7 +104,8 @@ console.log("responseToken=", responseToken);
 
   return (
     <div>
-      {!loading &&
+      {(!loading && !displayMoovTermsOfService) &&
+        <>
         <button
           onClick={() => open()}
           // onClick={() => handleOnClick()}
@@ -112,6 +113,19 @@ console.log("responseToken=", responseToken);
         >
           Link bank
         </button>
+        </>
+      }
+      {(!loading && displayMoovTermsOfService) &&
+        <>
+        <button
+          onClick={() => open()}
+          // onClick={() => handleOnClick()}
+          disabled={!ready}
+        >
+          Link bank
+        </button>
+        <MoovTerms moovAccessToken={moovAccessToken} />
+        </>
       }
       {loading &&
         <span>Loading...</span>
