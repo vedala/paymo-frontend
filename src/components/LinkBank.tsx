@@ -3,6 +3,7 @@ import { usePlaidLink } from "react-plaid-link";
 import { useAuth0 } from '@auth0/auth0-react';
 import { loadMoov } from "@moovio/moov-js";
 import MoovTerms from "./MoovTerms";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const LinkBank = ({ onAddBank }: any) => {
@@ -14,6 +15,8 @@ const LinkBank = ({ onAddBank }: any) => {
   const [termsOfService, setTermsOfService] = useState<string>("");
 
   const { user } = useAuth0();
+  const navigate = useNavigate();
+
   const onSuccess = useCallback(async (publicToken: string) => {
     setLoading(true);
 console.log("LinkBank: user=", user);
@@ -32,6 +35,7 @@ console.log("responseToken=", responseToken);
     setMoovAccessToken(responseData.moovAccessToken.token);
     // await loadMoov(moovAccessToken);
     setDisplayMoovTermsOfService(true);
+    navigate("/moov-tos", {state: {moovAccessToken}});
     onAddBank();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -93,18 +97,29 @@ console.log("responseToken=", responseToken);
   //   fetchTermsOfService();
   // }, []);
 
-  const handleOnClick = async () => {
-    open();
-    return (
-      <MoovTerms
-        moovAccessToken={moovAccessToken}
-      />
-    )
-  };
+  // const handleOnClick = async () => {
+  //   open();
+  //   return (
+  //     <MoovTerms
+  //       moovAccessToken={moovAccessToken}
+  //     />
+  //   )
+  // };
 
   return (
     <div>
-      {(!loading && !displayMoovTermsOfService) &&
+      {!loading &&
+        <>
+        <button
+          onClick={() => open()}
+          // onClick={() => handleOnClick()}
+          disabled={!ready}
+        >
+          Link bank
+        </button>
+        </>
+      }
+      {/* {(!loading && !displayMoovTermsOfService) &&
         <>
         <button
           onClick={() => open()}
@@ -124,9 +139,10 @@ console.log("responseToken=", responseToken);
         >
           Link bank
         </button>
+        <h5>Second conditional</h5>
         <MoovTerms moovAccessToken={moovAccessToken} />
         </>
-      }
+      } */}
       {loading &&
         <span>Loading...</span>
       }
