@@ -1,4 +1,5 @@
-import { useLocation, React } from 'react';
+import React from 'react';
+import { useLocation } from 'react-router-dom';
 
 // function MoovTerms({ moovAccessToken }) {
 function MoovTerms() {
