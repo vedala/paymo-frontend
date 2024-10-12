@@ -32,10 +32,11 @@ console.log("LinkBank: user=", user);
     const responseData = await exchangeTokenResponse.json();
     const responseToken = responseData.moovAccessToken.token;
 console.log("responseToken=", responseToken);
-    setMoovAccessToken(responseData.moovAccessToken.token);
+    setMoovAccessToken(responseToken);
     // await loadMoov(moovAccessToken);
     setDisplayMoovTermsOfService(true);
-    navigate("/moov-tos", {state: {moovAccessToken}});
+console.log("before naviate, moovAccessToken=", responseToken);
+    navigate("/moov-tos", {state: {moovAccessToken: responseToken}});
     onAddBank();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
