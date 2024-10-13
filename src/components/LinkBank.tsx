@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { usePlaidLink } from "react-plaid-link";
 import { useAuth0 } from '@auth0/auth0-react';
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 const LinkBank = ({ onAddBank }: any) => {
   const PAYMO_API_URL = process.env.REACT_APP_PAYMO_API_URL;
@@ -9,7 +9,7 @@ const LinkBank = ({ onAddBank }: any) => {
   const [loading, setLoading] = useState(false);
 
   const { user } = useAuth0();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const onSuccess = useCallback(async (publicToken: string) => {
     setLoading(true);
@@ -23,12 +23,13 @@ console.log("LinkBank: user=", user);
       body: JSON.stringify({ public_token: publicToken, user_id: user?.sub, user_name: user?.name, user_email: user?.email}),
     });
     setLoading(false);
-    const responseData = await exchangeTokenResponse.json();
-    const responseToken = responseData.moovAccessToken.token;
-console.log("responseToken=", responseToken);
+    // const responseData = await exchangeTokenResponse.json();
+console.log(exchangeTokenResponse.json());
+//     const responseToken = responseData.moovAccessToken.token;
+// console.log("responseToken=", responseToken);
 
-console.log("before naviate, moovAccessToken=", responseToken);
-    navigate("/moov-tos", {state: {moovAccessToken: responseToken}});
+// console.log("before naviate, moovAccessToken=", responseToken);
+//     navigate("/moov-tos", {state: {moovAccessToken: responseToken}});
     onAddBank();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -69,35 +70,12 @@ console.log("before naviate, moovAccessToken=", responseToken);
     if (token === null) {
       createLinkToken();
     }
-    // if (isOauth && ready) {
-    //   open();
-    // }
+  //   if (isOauth && ready) {
+  //     open();
+  //   }
   // }, [token, isOauth, ready, open]);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  // useEffect(() => {
-  //   // Fetch the TOS from Moov's API (replace with the correct endpoint)
-  //   const fetchTermsOfService = async () => {
-  //     try {
-  //       const response = await axios.get('https://api.moov.io/tos');
-  //       setTermsOfService(response.data.terms);
-  //     } catch (error) {
-  //       console.error('Error fetching Terms of Service:', error);
-  //     }
-  //   };
-
-  //   fetchTermsOfService();
-  // }, []);
-
-  // const handleOnClick = async () => {
-  //   open();
-  //   return (
-  //     <MoovTerms
-  //       moovAccessToken={moovAccessToken}
-  //     />
-  //   )
-  // };
 
   return (
     <div>
@@ -105,7 +83,6 @@ console.log("before naviate, moovAccessToken=", responseToken);
         <>
         <button
           onClick={() => open()}
-          // onClick={() => handleOnClick()}
           disabled={!ready}
         >
           Link bank
