@@ -6,7 +6,6 @@ import Dashboard from './components/Dashboard';
 import CallbackPage from './components/CallbackPage';
 import AuthenticationGuard from './components/AuthenticationGuard';
 import PageNotFound from './components/PageNotFound';
-import MoovTerms from './components/MoovTerms';
 
 function App() {
 
@@ -19,7 +18,6 @@ function App() {
           element={<AuthenticationGuard component={Dashboard} />}
         />
         <Route path="/callback" element={<CallbackPage />} />
-        <Route path="/moov-tos" element={<MoovTerms />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
     </div>
