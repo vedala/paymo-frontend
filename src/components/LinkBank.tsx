@@ -23,8 +23,8 @@ console.log("LinkBank: user=", user);
       body: JSON.stringify({ public_token: publicToken, user_id: user?.sub, user_name: user?.name, user_email: user?.email}),
     });
     setLoading(false);
-    // const responseData = await exchangeTokenResponse.json();
-console.log(exchangeTokenResponse.json());
+    const responseData = await exchangeTokenResponse.json();
+console.log(responseData);
 //     const responseToken = responseData.moovAccessToken.token;
 // console.log("responseToken=", responseToken);
 

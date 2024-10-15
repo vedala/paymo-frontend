@@ -5,15 +5,15 @@ import LogoutButton from './LogoutButton';
 import SignupButton from './SignupButton';
 
 function NavBar() {
-  const { isAuthenticated, isLoading } = useAuth0();
+  const { isAuthenticated, isLoading, user } = useAuth0();
 
   if (isLoading) {
     return <div>Loading ...</div>;
   }
 
   return (
-    <div className="header">
-      <span>Paymo</span>
+    <div className="navbar">
+      <span className="title">Paymo</span>
       { !isAuthenticated && (
         <>
           <LoginButton />
@@ -22,6 +22,7 @@ function NavBar() {
       )}
       { isAuthenticated && (
         <>
+          <span className="logged-in-user">Logged in as: {user?.name}</span>
           <LogoutButton />
         </>
       )}
