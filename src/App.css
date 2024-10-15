@@ -39,6 +39,14 @@ ul.tab-bar button.active {
   background-color: #FFAA80;
 }
 
+.navbar .title {
+  margin-right: 30px;
+}
+
+.navbar .logged-in-user {
+  margin-right: 30px;
+}
+
 .send-money #select-recipient,#enter-amount,#submit-button {
   margin-top: 2em;
 }
