@@ -52,7 +52,7 @@ console.log(responseData);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [setToken]);
 
-  let isOauth = false;
+  // let isOauth = false;
 
   const config: any = {
     token,
@@ -61,7 +61,7 @@ console.log(responseData);
 
   if (window.location.href.includes("?oauth_state_id")) {
     config.receivedRedirectUri = window.location.href;
-    isOauth = true;
+    // isOauth = true;
   }
 
   const { open, ready } = usePlaidLink(config);
